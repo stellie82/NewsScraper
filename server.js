@@ -1,8 +1,10 @@
 // Required modules
 var express = require("express");
 var exphbs = require("express-handlebars");
+var logger = require("morgan");
 var mongoose = require("mongoose");
-var mongojs = require("mongojs");
+
+// Scraping tools
 var axios = require("axios");
 var cheerio = require("cheerio");
 
@@ -10,20 +12,21 @@ var cheerio = require("cheerio");
 var app = express();
 var PORT = process.env.PORT || 8080;
 
+// Require all models
+var db = require("./models");
+
+// Configure middleware
+app.use(logger("dev"));
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.static("public"));
+
 // If deployed use the deployed DB, otherwise use the local mongoHeadlines DB
 // var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 // mongoose.connect(MONGODB_URI);
-// mongoose.connect("mongodb://localhost:27017/YourDB", { useNewUrlParser: true });
 
-// Database configuration
-var databaseUrl = "scraper";
-var collections = ["newsData"];
-
-// Hook mongojs configuration to the DB variable
-var db = mongojs(databaseUrl, collections);
-db.on("error", function(err) {
-    console.log("Database Error:", err);
-});
+// Mongo DB connection
+mongoose.connect("mongodb://localhost/mongoHeadlines", {useNewUrlParser: true});
 
 // Routes
 app.get("/", function(req, res) {
@@ -31,7 +34,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/all", function(req, res) {
-    db.scrapeData.find({}, function(err, data) {
+    db.newsData.find({}, function(err, data) {
         if (err) {
             console.log(err);
         }
