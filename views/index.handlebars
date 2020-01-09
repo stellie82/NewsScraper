@@ -3,8 +3,8 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="/">Home</a>
       <a class="nav-item nav-link" href="/saved">Saved Articles</a>
-      <button class="btn btn-sm btn-outline-secondary" type="button">Scrape New Articles</button>
-      <button class="btn btn-sm btn-outline-secondary" type="button">Clear Articles</button>
+      <button class="btn btn-sm btn-outline-secondary" id="refresh" type="button">Scrape New Articles</button>
+      <button class="btn btn-sm btn-outline-secondary" id="clear" type="button">Clear Articles</button>
     </div>
   </div>
 </nav>
@@ -16,8 +16,7 @@
     </div>
 </div>
 
-<div class="container-fluid" id="articles-container">
+<div class="container-fluid" id="articles-container"></div>
 
-</div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="app.js"></script>

@@ -11,13 +11,13 @@ module.exports = function(app) {
         axios.get("https://www.scientificamerican.com/section/lateststories/").then(function(response) {
             var $ = cheerio.load(response.data);
 
-            $(".listing-wide").each(function(i, element) {
+            $("article").each(function(i, element) {
                 var results = {};
-
-                results.title = $(this).find(".t_listing-title").text().trim();
-                results.link = $(this).find("a").attr("href");
-                results.img = $(this).find("img").attr("src");
-                results.summary = $(this).find("p.t_body").text().trim();
+                
+                results.title = $(".t_listing-title", element).text().trim();
+                results.link = $(".t_listing-title a", element).attr("href");
+                results.image = $("picture img", element).attr("src");
+                results.summary = $(".t_body", element).text().trim();
 
                 db.Article.create(results)
                     .then(function(dbArticle) {

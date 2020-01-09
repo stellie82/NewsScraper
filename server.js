@@ -27,11 +27,12 @@ app.set("view engine", "handlebars");
 require("./routes/routes")(app);
 
 // If deployed use the deployed DB, otherwise use the local mongoHeadlines DB
-// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+// var MONGODB_URI = (process.env.MONGODB_URI, {useUnifiedTopology: true,
+//   useNewUrlParser: true}) || "mongodb://localhost/mongoHeadlines";
 // mongoose.connect(MONGODB_URI);
 
 // Mongo DB connection
-mongoose.connect("mongodb://localhost/mongoHeadlines", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost/newsArticles", {useUnifiedTopology: true, useNewUrlParser: true});
 
 // Start server to begin listening
 app.listen(PORT, function () {
