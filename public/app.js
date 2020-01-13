@@ -19,9 +19,7 @@ function scrapeArticles() {
         url: "/scrape",
     })
         .then(function() {
-            $("#home").click(function() {
-                console.log("Articles have been scraped.");
-            });
+           console.log("Articles have been scraped.");
         });
 
 };
