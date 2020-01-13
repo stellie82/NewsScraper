@@ -33,6 +33,7 @@ function clearArticles() {
     })
         .then(function() {
             console.log("All articles have been cleared from the page.");
+            window.location.href = "/";
         });
     $("#articles-container").empty();
 };
