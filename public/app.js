@@ -1,51 +1,43 @@
-var refreshArticles = function() {
-    $.getJSON("/articles", function(data) {
-        console.log(data);
-        for (var i = 0; i < data.length; i++) {
-            var card = $("<div article-id='" + data[i]._id + "'>");
+// Add event listener for save button on all articles
+$(document).on("click", ".save-button", function() {
+    var thisId = $(this).attr("article-id");
+    console.log(thisId);
 
-            var header = $("<h5>").addClass("card-header");
+    $.ajax({
+        method: "GET",
+        url: "/save-article/" + thisId,
+    })
+        .then(function() {
+            console.log("Article ID: " + thisId + "has been added to your saved list.");
+        });
+});
 
-            var title = $("<a>")
-                .attr("href", data[i].link)
-                .attr("target", "_blank")
-                .text(data[i].title)
-                .addClass("article-title");
-
-            var saveBtn = $("<button>")
-                .addClass("btn btn-sm btn-outline-secondary save-button")
-                .text("Save Article");
-
-            header.append(title);
-            header.append(saveBtn);
-
-            var body = $("<div>")
-                .addClass("card-body");
-
-            var imgURL = data[i].image;
-            var image = $("<img>").attr({
-                src: imgURL,
-                class: "article-img",
-                alt: "article-photo",
-                style: "width: 200px"
+// Create function to scrape articles for page
+function scrapeArticles() {
+    $.ajax({
+        method: "GET",
+        url: "/scrape",
+    })
+        .then(function() {
+            $("#home").click(function() {
+                console.log("Articles have been scraped.");
             });
+        });
 
-            var summary = $("<p>").text(data[i].summary);
-
-            body.append(image);
-            body.append(summary);
-
-            card.append(header);
-            card.append(body);
-            $("#articles-container").append(card);
-        };
-    });
 };
 
-var clearArticles = function() {
+// Create function to clear articles from the page
+function clearArticles() {
+    $.ajax({
+        method: "GET",
+        url: "/articles/clear",
+    })
+        .then(function() {
+            console.log("All articles have been cleared from the page.");
+        });
     $("#articles-container").empty();
 };
 
-// Add event listener for the refresh button
-$("#refresh").on("click", refreshArticles);
+// Add event listeners to scrape and clear articles from page
 $("#clear").on("click", clearArticles);
+$("#scrape").on("click", scrapeArticles);
