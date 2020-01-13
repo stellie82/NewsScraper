@@ -9,20 +9,21 @@ $(document).on("click", ".save-button", function() {
     })
         .then(function() {
             console.log("Article ID: " + thisId + "has been added to your saved list.");
+            window.location.href = "/";
         });
 });
 
 // Create function to scrape articles for page
-function scrapeArticles() {
+$(document).on("click", "#scrape", function() {
     $.ajax({
         method: "GET",
         url: "/scrape",
     })
-        .then(function() {
-           console.log("Articles have been scraped.");
+        .then(function(data) {
+            console.log("Articles have been scraped.");
+            window.location.href = "/";
         });
-
-};
+})
 
 // Create function to clear articles from the page
 function clearArticles() {
@@ -38,4 +39,3 @@ function clearArticles() {
 
 // Add event listeners to scrape and clear articles from page
 $("#clear").on("click", clearArticles);
-$("#scrape").on("click", scrapeArticles);
