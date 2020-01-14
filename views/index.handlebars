@@ -19,7 +19,7 @@
 
 <div class="container-fluid" id="articles-container">
   {{#each articles}}
-  {{#unless this.saved}}{{/unless}}
+  {{#unless this.saved}}
   <div class="card">
     <div class="card-header">
       <h5>
@@ -33,6 +33,7 @@
       <p>{{this.summary}}</p>
     </div>
   </div>
+  {{/unless}}
   {{/each}}
 </div>
 

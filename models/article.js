@@ -29,10 +29,10 @@ var articleSchema = new Schema({
         type: Boolean,
         default: false
     },
-    note: {
+    notes: [{
         type: Schema.Types.ObjectId,
         ref: "Note"
-    }
+    }]
 });
 
 // Model created using above schema, using mongoose's model method
