@@ -31,6 +31,7 @@ $(document).ready(function(event) {
     $("#saved-articles").on("click", ".article-notes", function() {
         $("#modalBox").modal("show");
         $(".modal-body").empty();
+        $(".modal-notes").empty();
         var thisId = $(this).attr("article-id");
 
         $.ajax({
