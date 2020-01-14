@@ -1,5 +1,5 @@
 // Add event listener for save button on all articles
-$(document).on("click", ".save-button", function() {
+$(document).on("click", ".save-article", function() {
     var thisId = $(this).attr("article-id");
     console.log(thisId);
 
@@ -10,6 +10,21 @@ $(document).on("click", ".save-button", function() {
         .then(function() {
             console.log("Article ID: " + thisId + "has been added to your saved list.");
             window.location.href = "/";
+        });
+});
+
+// Add event listener for delete button on all articles
+$(document).on("click", ".delete-saved", function() {
+    var thisId = $(this).attr("article-id");
+    console.log(thisId);
+
+    $.ajax({
+        method: "GET",
+        url: "/delete-saved/" + thisId,
+    })
+        .then(function() {
+            console.log("Article ID: " + thisId + "has been deleted from your saved list.");
+            window.location.href = "/saved-articles";
         });
 });
 

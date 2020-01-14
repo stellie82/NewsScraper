@@ -98,6 +98,16 @@ module.exports = function(app) {
             });
     })
 
+    app.get("/delete-saved/:id", function(req, res) {
+        db.Article.updateOne({_id: req.params.id}, {saved: false})
+            .then(function(writeOpResult) {
+                res.json(writeOpResult);
+            })
+            .catch(function(err) {
+                res.json(err);
+            });
+    });
+
     // app.post("/article/:id", function(req, res) {
     //     db.Note.create(req.body)
     //         .then(function(dbNote) {
