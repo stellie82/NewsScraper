@@ -57,7 +57,7 @@ $(document).ready(function(event) {
                         console.log(data.notes[i]);
                         var card = $("<div class='article-note'>");
                         var title = "<h5>" + data.notes[i].title + "</h5>";
-                        var body = "<p>" + data.notes[i].body + "</p>";
+                        var body = "<p>" + data.notes[i].body + "</p>" + "<hr>";
 
                         card.append(title);
                         card.append(body);
@@ -98,6 +98,29 @@ $(document).ready(function(event) {
             .then(function(data) {
                 console.log("Articles have been scraped.");
                 window.location.href = "/";
+            });
+    });
+
+    // Create function to scrape articles for page through link
+    $("#articles-container").on("click", "#link-scrape", function() {
+        $.ajax({
+            method: "GET",
+            url: "/scrape",
+        })
+            .then(function(data) {
+                console.log("Articles have been scraped.");
+                window.location.href = "/";
+            });
+    })
+
+    // Create function to scrape articles for page through link
+    $("#articles-container").on("click", "#link-saved", function() {
+        $.ajax({
+            method: "GET",
+            url: "/saved-articles",
+        })
+            .then(function(data) {
+                window.location.href = "/saved-articles";
             });
     })
 

@@ -38,4 +38,19 @@ h5 {
 
 body {
     background-image: url(../images/texture.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#link-scrape, #link-saved {
+    display: block;
+}
+
+#no-articles {
+    text-align: center;
+}
+
+.modal-body, .modal-notes {
+    margin: 20px;
+    padding: 0 20px;
 }

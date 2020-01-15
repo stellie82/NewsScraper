@@ -3,7 +3,8 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link active" id="home" href="/">Home</a>
       <a class="nav-item nav-link" href="/saved-articles">Saved Articles</a>
-      <button class="btn btn-sm btn-outline-primary" id="scrape" href="/scrape" type="button">Scrape New Articles</button>
+      <button class="btn btn-sm btn-outline-primary" id="scrape" href="/scrape" type="button">Scrape New
+        Articles</button>
       <button class="btn btn-sm btn-outline-secondary" id="clear" href="/articles/clear" type="button">Clear
         Articles</button>
     </div>
@@ -15,7 +16,9 @@
   <p class="lead">Scientific American</p>
 </div>
 
+{{!-- Container for scraped articles --}}
 <div class="container-fluid" id="articles-container">
+  {{#if articles}}
   {{#each articles}}
   {{#unless this.saved}}
   <div class="card border-primary">
@@ -25,7 +28,6 @@
       </h5>
       <button class="btn btn-sm btn-outline-secondary save-article" article-id={{this.id}}>Save Article</button>
     </div>
-
     <div class="card-body">
       <img src={{this.image}} class="article-img" alt="article-photo" style="width: 200px">
       <p>{{this.summary}}</p>
@@ -33,7 +35,18 @@
   </div>
   {{/unless}}
   {{/each}}
-</div>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/app.js"></script>
+  {{else}}
+  <div class="card border-primary" id="no-articles">
+    <div class="card-header">
+      <h5>There are no articles to show. What would you like to do?</h5>
+    </div>
+    <div class="card-body">
+      <a id="link-scrape" href="/scrape">Scrape new articles</a>
+      <a id="link-saved" href="/saved-articles">Go to Saved Articles</a>
+    </div>
+  </div>
+  {{/if}}
+  <div class=</div> <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src="/js/app.js"></script>
