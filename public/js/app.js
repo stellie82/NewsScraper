@@ -33,13 +33,14 @@ $(document).ready(function(event) {
         $(".modal-body").empty();
         $(".modal-notes").empty();
         var thisId = $(this).attr("article-id");
+        console.log(thisId);
 
         $.ajax({
             method: "GET",
             url: "/article/" + thisId
         })
             .then(function(data) {
-                // console.log(data);
+                console.log(data);
                 $(".modal-body").append(
                     "<div class='input-group mb-3'>" +
                     "<input id='title-input' type='text' class='form-control' placeholder='Title'>" +
@@ -52,9 +53,12 @@ $(document).ready(function(event) {
                     "</div>"
                 );
 
+                $(".modal-title").html("<h5>Notes for Article: " + data.title + "</h5>");
+                $("#save-note").attr("article-id", data._id);
+
                 if (data.notes) {
+                    console.log(data.notes);
                     for (i = 0; i < data.notes.length; i++) {
-                        console.log(data.notes[i]);
                         var card = $("<div class='article-note'>");
                         var title = "<h5>" + data.notes[i].title + "</h5>";
                         var body = "<p>" + data.notes[i].body + "</p>" + "<hr>";
