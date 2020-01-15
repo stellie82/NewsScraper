@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" id="home" href="/">Home</a>
@@ -9,17 +9,15 @@
   </div>
 </nav>
 
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">News Article Scraper</h1>
-    <p class="lead">Scientific American</p>
-  </div>
+<div class="container-fluid" id="parallax-container">
+  <h1 class="display-4">News Article Scraper</h1>
+  <p class="lead">Scientific American</p>
 </div>
 
 <div class="container-fluid" id="saved-articles">
   {{#each articles}}
   {{#if this.saved}}
-  <div class="card">
+  <div class="card border-dark">
     <div class="card-header">
       <h5>
         <a class="article-title" href={{this.link}} target="_blank">{{this.title}}</a>
@@ -67,4 +65,4 @@
   integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="app.js"></script>
+<script src="/js/app.js"></script>
