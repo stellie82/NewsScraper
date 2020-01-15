@@ -32,6 +32,7 @@ module.exports = function(app) {
 
     // Route to scrape Scientific American webpage
     app.get("/scrape", function(req, res) {
+
         axios.get("https://www.scientificamerican.com/section/lateststories/").then(function(response) {
             var $ = cheerio.load(response.data);
 
@@ -43,6 +44,20 @@ module.exports = function(app) {
                 results.image = $("picture img", element).attr("src");
                 results.summary = $(".t_body", element).text().trim();
 
+                db.Article.deleteMany({})
+                    .then(function(deleteArticles) {
+                        console.log(deleteArticles);
+                    })
+                    .catch(function(err) {
+                        res.json(err);
+                    });
+                db.Note.deleteMany({})
+                    .then(function(deleteNotes) {
+                        console.log(deleteNotes);
+                    })
+                    .catch(function(err) {
+                        res.json(err);
+                    });
                 db.Article.create(results)
                     .then(function(dbArticle) {
                         console.log(dbArticle);
@@ -134,11 +149,11 @@ module.exports = function(app) {
                 res.json(err);
             });
         db.Note.deleteMany({})
-            .then(function(deleteArticles) {
-                res.json(deleteArticles);
+            .then(function(deleteNotes) {
+                res.json(deleteNotes);
             })
             .catch(function(err) {
                 res.json(err);
             });
-    })
+    });
 };
